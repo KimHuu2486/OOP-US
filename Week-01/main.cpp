@@ -1,6 +1,7 @@
 #include "function.h"
 
 int main() {
+    
     int n;
     cout << "Enter number of fractions: ";
     cin >> n;
