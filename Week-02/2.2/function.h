@@ -4,23 +4,23 @@
 #include <iostream>
 #include <math.h>
 #include <string>
-#include <sstream>
 using namespace std;
 class Monomial {
 private:
     string coef, expo;
     bool isNumber(string s);
+    string trimZeros(string x);
 public:
     void input();
     void output();
     float getCoef();
-    void setCoef(int newCoef);
+    void setCoef(string newCoef);
     float getExpo();
-    void setExpo(int newExpo);
+    void setExpo(string newExpo);
     float evaluate(float base);
     Monomial derive();
     Monomial mul(Monomial seccondMono);
 };
 
 
-#endif
+#endif 
