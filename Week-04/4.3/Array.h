@@ -23,19 +23,13 @@ public:
             delete[] _arr;
             _arr = nullptr;
             _len = 0;
-            std::cout << "Array destroyed!" << std::endl;
         }
     }
 public:
     Array<T>& operator=(const Array<T>& other) {
-        if (this != &other) {
-            delete[] _arr;
-            _len = other._len;
-            _arr = new T[_len];
-            for (size_t i = 0; i < _len; ++i) {
-                _arr[i] = other._arr[i];
-            }
-        }
+        Array<T> temp(other);
+        std::swap(this->_arr, temp._arr);
+        std::swap(this->_len, temp._len);
         return *this;
     }
     T& operator[](size_t index) {
