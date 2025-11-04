@@ -48,6 +48,7 @@ void Polynomial::setDegree(const int& degree) {
         newCoef[i] = m_coef[i];
     }
     
+    // Trường hợp degree > m_degree
     for (int i = limit + 1; i <= degree; i++) {
         newCoef[i] = 0.0;
     }
