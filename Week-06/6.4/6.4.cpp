@@ -24,7 +24,7 @@ void Read_And_Write_Prime_Numbers(const std::string& Path_Input, const std::stri
     std::istream_iterator<int> it_begin(ifs), it_end;
     std::ostream_iterator<int> out(ofs, "\n");
 
-    std::copy_if(it_begin, it_end, out, isPrime);
+    std::remove_copy_if(it_begin, it_end, out, isPrime);
 }
 
 int main() {
