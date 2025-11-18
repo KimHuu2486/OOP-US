@@ -25,3 +25,17 @@ int main () {
     }
     std::cout << "\n";
 }
+
+
+// #include <iostream>
+// #include <string>
+// int main() {
+//     std::cout << "Hello world!!!" << std::endl;
+//     std::cout << "Bachelor of Science Honors Program!!!\n";
+//     std::cout << "My major is in " << major << ".\n";
+//     std::cout << "Target graduation in: " << year << ".\n";
+//     std::cout << "Status: Ready to compile and make an impact!\n";
+//     return 0;
+// }
+
+
