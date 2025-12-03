@@ -64,7 +64,7 @@ void Cinema::setPrices()
 
     while (left >= 0 && right < m_rows)
     {
-        double price = m_seats[left + 1][0] - 0.5;
+        double price = max(m_seats[left + 1][0] - 0.5, 0.0);
 
         for (int j = 0; j < m_cols; ++j)
         {
