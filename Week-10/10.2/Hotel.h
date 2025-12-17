@@ -5,11 +5,12 @@
 #include "RoomC.h"
 #include <vector>
 #include <iostream>
+#include <memory>
 
 class Hotel
 {
 private:
-    std::vector<Room *> rentedRooms;
+    std::vector<std::unique_ptr<Room>> rentedRooms;
 
 public:
     void input()
@@ -22,29 +23,30 @@ public:
             int roomType;
             std::cout << "Enter room type (1 for A, 2 for B, 3 for C): ";
             std::cin >> roomType;
-            Room *room = nullptr;
+
+            std::unique_ptr<Room> room;
             switch (roomType)
             {
             case 1:
-                room = new RoomA();
+                room = std::make_unique<RoomA>();
                 break;
             case 2:
-                room = new RoomB();
+                room = std::make_unique<RoomB>();
                 break;
             case 3:
-                room = new RoomC();
+                room = std::make_unique<RoomC>();
                 break;
             default:
                 std::cout << "Invalid room type!" << std::endl;
-                --i; // retry this iteration
+                --i;
                 continue;
             }
             std::cin >> *room;
-            rentedRooms.push_back(room);
+            rentedRooms.push_back(std::move(room));
         }
     }
 
-    double calTotalRentPrice()
+    double calTotalRentPrice() const
     {
         double total = 0.0;
         for (const auto &room : rentedRooms)
@@ -52,13 +54,5 @@ public:
             total += room->calRentPrice();
         }
         return total;
-    }
-
-    ~Hotel()
-    {
-        for (auto &room : rentedRooms)
-        {
-            delete room;
-        }
     }
 };

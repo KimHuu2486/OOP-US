@@ -4,11 +4,12 @@
 #include "Worker.h"
 #include <vector>
 #include <iostream>
+#include <memory>
 
 class Company
 {
 private:
-    std::vector<Employee *> employees;
+    std::vector<std::unique_ptr<Employee>> employees;
 
 public:
     void input()
@@ -24,14 +25,14 @@ public:
             std::cin >> type;
             std::cin.ignore();
 
-            Employee *emp = nullptr;
+            std::unique_ptr<Employee> emp;
             if (type == 1)
             {
-                emp = new Officer();
+                emp = std::make_unique<Officer>();
             }
             else if (type == 2)
             {
-                emp = new Worker();
+                emp = std::make_unique<Worker>();
             }
             else
             {
@@ -41,11 +42,11 @@ public:
             }
 
             std::cin >> *emp;
-            employees.push_back(emp);
+            employees.push_back(std::move(emp));
         }
     }
 
-    double calTotalSalary()
+    double calTotalSalary() const
     {
         double total = 0.0;
         for (const auto &emp : employees)
@@ -53,14 +54,5 @@ public:
             total += emp->calculateSalary() + emp->calculateBonus();
         }
         return total;
-    }
-
-    ~Company()
-    {
-        for (auto &emp : employees)
-        {
-            delete emp;
-        }
-        employees.clear();
     }
 };

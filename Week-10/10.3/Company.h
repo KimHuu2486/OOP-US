@@ -4,11 +4,12 @@
 #include "Trapezoid.h"
 #include <vector>
 #include <iostream>
+#include <memory>
 
 class Company
 {
 private:
-    std::vector<Land *> lands;
+    std::vector<std::unique_ptr<Land>> lands;
 
 public:
     void input()
@@ -21,14 +22,15 @@ public:
             int choice;
             std::cout << "Enter type of land (1 for Rectangle, 2 for Trapezoid): ";
             std::cin >> choice;
-            Land *land = nullptr;
+
+            std::unique_ptr<Land> land;
             if (choice == 1)
             {
-                land = new Rectangle();
+                land = std::make_unique<Rectangle>();
             }
             else if (choice == 2)
             {
-                land = new Trapezoid();
+                land = std::make_unique<Trapezoid>();
             }
             else
             {
@@ -37,11 +39,11 @@ public:
                 continue;
             }
             std::cin >> *land;
-            lands.push_back(land);
+            lands.push_back(std::move(land));
         }
     }
 
-    double calculateTotalPrice()
+    double calculateTotalPrice() const
     {
         double total = 0.0;
         for (const auto &land : lands)
@@ -51,7 +53,7 @@ public:
         return total;
     }
 
-    double calculateTotalArea()
+    double calculateTotalArea() const
     {
         double totalArea = 0.0;
         for (const auto &land : lands)
@@ -59,13 +61,5 @@ public:
             totalArea += land->area();
         }
         return totalArea;
-    }
-
-    ~Company()
-    {
-        for (auto &land : lands)
-        {
-            delete land;
-        }
     }
 };
