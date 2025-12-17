@@ -14,11 +14,11 @@ public:
         return height * width;
     }
 
-    void input(std::istream& in) override {
-        Land::input(in);
+    void input() override {
+        Land::input();
         std::cout << "Enter height: ";
-        in >> height;
+        std::cin >> height;
         std::cout << "Enter width: ";
-        in >> width;
+        std::cin >> width;
     }
 };

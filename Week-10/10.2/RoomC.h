@@ -1,16 +1,21 @@
 #pragma once
 #include "Room.h"
 
-class RoomC : public Room {
-private:
-    const double basePrice = 100.0;
+class RoomC : public Room
+{
 public:
-    RoomC(int days = 0) : Room(days) {}
+    RoomC(int days = 0) : Room(100.0, days) {}
 
-    double calculateCost() const override {
-        int days = getCntDays();
-        return basePrice * days;
+    void input() override
+    {
+        std::cout << "Enter number of days rented for Room C: ";
+        std::cin >> cntDays;
     }
-    
+
+    double calRentPrice() override
+    {
+        return basePrice * cntDays;
+    }
+
     ~RoomC() override {}
 };

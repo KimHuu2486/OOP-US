@@ -19,13 +19,13 @@ public:
         return area() * basePrice * 0.95;
     }
 
-    void input(std::istream& in) override {
-        Land::input(in);
+    void input() override {
+        Land::input();
         std::cout << "Enter height: ";
-        in >> height;
+        std::cin >> height;
         std::cout << "Enter length of parallel side 1: ";
-        in >> parallel1;
+        std::cin >> parallel1;
         std::cout << "Enter length of parallel side 2: ";
-        in >> parallel2;
+        std::cin >> parallel2;
     }
 };
